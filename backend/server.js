@@ -30,7 +30,7 @@ worker.on('completed', (job, resultado) => {
   io.emit('tarea:completada', { id: job.id, resultado })
 })
 
-app.get('/api/salud', (req, res) => res.json({ ok: true }))
+app.get('/api/salud', (req, res) => res.json({ message: "Hola desde backend" }))
 
 app.post('/api/tareas', async (req, res) => {
   const mensaje = String(req.body?.mensaje ?? 'hola').slice(0, 200)
