@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-canvas: #0c0c0e;
+  --color-surface: #141418;
+  --color-raised: #1c1c22;
+  --color-line: #24242b;
+  --color-edge: #2e2e36;
+  --color-edge-strong: #3a3a44;
+  --color-fg: #ededf0;
+  --color-muted: #b9b9c3;
+  --color-subtle: #8f8f9b;
+  --color-accent: #ff8a3d;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Solid offset shadows: the visual signature of the "layered windows" design */
+  --shadow-layer-sm: 4px 4px 0 var(--color-accent);
+  --shadow-layer-md: 6px 6px 0 var(--color-accent);
+  --shadow-layer: 8px 8px 0 var(--color-accent);
+  --shadow-layer-lg: 10px 10px 0 var(--color-accent);
+  --shadow-light-sm: 4px 4px 0 var(--color-fg);
+  --shadow-light: 6px 6px 0 var(--color-fg);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas font-sans leading-relaxed text-fg antialiased;
+    background-image: radial-gradient(#1d1d22 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+}

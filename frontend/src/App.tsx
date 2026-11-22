@@ -1,15 +1,19 @@
+import Contact from './components/Contact';
+import Demos from './components/Demos';
+import Experience from './components/Experience';
+import Hero from './components/Hero';
+import Layout from './components/Layout';
+import Projects from './components/Projects';
+
 function App() {
   return (
-    <main
-      style={{
-        fontFamily: 'sans-serif',
-        textAlign: 'center',
-        marginTop: '4rem',
-      }}
-    >
-      <h1>Hola mundo 👋</h1>
-      <p>Mi portafolio en construcción. Typescript</p>
-    </main>
+    <Layout>
+      <Hero />
+      <Projects />
+      <Demos />
+      <Experience />
+      <Contact />
+    </Layout>
   );
 }
 
