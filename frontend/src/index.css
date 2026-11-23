@@ -23,6 +23,15 @@
   --shadow-layer-lg: 10px 10px 0 var(--color-accent);
   --shadow-light-sm: 4px 4px 0 var(--color-fg);
   --shadow-light: 6px 6px 0 var(--color-fg);
+
+  /* Terminal-style text cursor: hard on/off, no fade */
+  --animate-blink: blink 1s step-end infinite;
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
 }
 
 @layer base {

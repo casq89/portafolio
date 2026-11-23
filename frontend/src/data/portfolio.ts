@@ -25,14 +25,6 @@ export interface Project {
   demoUrl?: string;
 }
 
-interface Job {
-  period: string;
-  role: string;
-  company: string;
-  description: string;
-  current: boolean;
-}
-
 interface SocialLink {
   name: string;
   url: string;
@@ -41,7 +33,6 @@ interface SocialLink {
 export const navLinks: NavLink[] = [
   { label: 'projects', href: '/#projects' },
   { label: 'demos', href: '/#demos' },
-  { label: 'experience', href: '/#experience' },
   { label: 'contact', href: '/#contact' },
 ];
 
@@ -85,35 +76,12 @@ export const projects: Project[] = [
   },
 ];
 
-export const jobs: Job[] = [
-  {
-    period: '[year] — present',
-    role: '[Role]',
-    company: '[Company]',
-    description: '[What you did and achieved, in one or two lines.]',
-    current: true,
-  },
-  {
-    period: '[year] — [year]',
-    role: '[Role]',
-    company: '[Company]',
-    description: '[What you did and achieved, in one or two lines.]',
-    current: false,
-  },
-  {
-    period: '[year] — [year]',
-    role: '[Role]',
-    company: '[Company]',
-    description: '[What you did and achieved, in one or two lines.]',
-    current: false,
-  },
-];
-
 export const socialLinks: SocialLink[] = [
-  { name: 'GitHub', url: '#' },
-  { name: 'LinkedIn', url: '#' },
-  { name: 'Email', url: '#' },
+  { name: 'GitHub', url: 'https://github.com/casq89' },
+  // TODO: replace with the personal LinkedIn profile URL.
+  { name: 'LinkedIn', url: 'https://www.linkedin.com' },
+  { name: 'Email', url: 'mailto:casq89@gmail.com' },
 ];
 
-export const email = '[your-email@domain.com]';
+export const email = 'casq89@gmail.com';
 export const cvUrl = '#';

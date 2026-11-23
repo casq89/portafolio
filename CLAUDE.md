@@ -20,10 +20,10 @@ There are no tests yet.
 ## Architecture
 
 - **Frontend**: React 19 SPA, rendered on the client. Entry point: `src/main.tsx` → `src/App.tsx`.
-  - Routing with `react-router` (`BrowserRouter` in `main.tsx`, routes in `App.tsx`). `App.tsx` renders `components/Layout` (Navbar + Footer) around the current screen. Screens: `/` → `screens/Home` (renders `Hero`, `Projects`, `Demos`, `Experience`, `Contact`), `/konecta` → `screens/Konecta` (KCRM case study), `/invitation-homes` → `screens/InvitationHomes` and `/british-airways` → `screens/BritishAirways` (mobile app case studies). Unknown paths redirect to `/`.
+  - Routing with `react-router` (`BrowserRouter` in `main.tsx`, routes in `App.tsx`). `App.tsx` renders `components/Layout` (Navbar + Footer) around the current screen. Screens: `/` → `screens/Home` (renders `Hero`, `Projects`, `Demos`, `Contact`), `/konecta` → `screens/Konecta` (KCRM case study), `/invitation-homes` → `screens/InvitationHomes` and `/british-airways` → `screens/BritishAirways` (mobile app case studies). Unknown paths redirect to `/`.
   - Links to home sections use `/#section` with `<Link>`; `Layout` scrolls to the hash (or to the top) on every navigation. Use `<Link>` for internal routes, never `<a href>`.
   - A project with a `route` in `data/portfolio.ts` makes its whole card link to that screen. Case-study content lives in its own data file typed with `data/caseStudy.ts` (e.g. `data/konecta.ts`, `data/britishAirways.ts`); images go in `src/assets/<project>/`.
-  - Content (projects, jobs, links) lives typed in `src/data/portfolio.ts`; components only render it.
+  - Content (projects, nav and social links) lives typed in `src/data/portfolio.ts`; components only render it.
   - Styling: Tailwind CSS 4 via `@tailwindcss/vite`, no config file. Design tokens (colors, fonts, offset shadows) are defined in `@theme` in `src/index.css`; use those utilities (`bg-surface`, `text-muted`, `shadow-layer`…) instead of raw hex values.
   - TypeScript is pinned to `~6.0` because `typescript-eslint` does not support TypeScript 7 yet. Do not upgrade it until it does.
 - **Backend**: everything currently lives in `src/server.ts`:

@@ -6,7 +6,11 @@ function Footer() {
       <ul className="flex justify-center gap-6">
         {socialLinks.map((link) => (
           <li key={link.name}>
-            <a href={link.url} className="text-muted transition-colors hover:text-fg">
+            <a
+              href={link.url}
+              {...(link.url.startsWith('http') && { target: '_blank', rel: 'noreferrer' })}
+              className="text-muted transition-colors hover:text-fg"
+            >
               {link.name}
             </a>
           </li>

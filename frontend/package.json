@@ -7,7 +7,6 @@
     "dev": "vite",
     "lint": "eslint .",
     "preview": "vite preview",
-    "upload:ssh": "pscp -r dist/* root@205.209.121.32:/var/www/portafolio/",
     "build": "tsc -b && vite build"
   },
   "dependencies": {
