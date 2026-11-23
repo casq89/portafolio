@@ -26,7 +26,7 @@ function Demos() {
                   <span
                     className={
                       state === 'completed'
-                        ? 'rounded-lg bg-accent px-3 py-1.5 font-bold text-canvas'
+                        ? 'rounded-lg bg-accent px-3 py-1.5 font-bold text-on-accent'
                         : 'rounded-lg border-[1.5px] border-edge-strong px-3 py-1.5'
                     }
                   >
@@ -37,7 +37,7 @@ function Demos() {
             </ol>
             <a
               href="#"
-              className="mt-1.5 self-start rounded-[10px] bg-accent px-5 py-[11px] font-semibold text-canvas"
+              className="mt-1.5 self-start rounded-[10px] bg-accent px-5 py-[11px] font-semibold text-on-accent"
             >
               Open demo ↗
             </a>

@@ -19,7 +19,7 @@ function Contact() {
         <p className="mt-5 max-w-[400px] font-mono text-muted">Got a project or an opening? Write to me and I'll get back to you soon.</p>
         <a
           href={`mailto:${email}`}
-          className="mt-8 inline-block -rotate-3 rounded-xl border-[1.5px] border-canvas bg-accent px-[18px] py-3.5 font-mono text-sm font-bold text-canvas shadow-light"
+          className="mt-8 inline-block -rotate-3 rounded-xl border-[1.5px] border-canvas bg-accent px-[18px] py-3.5 font-mono text-sm font-bold text-on-accent shadow-light"
         >
           {email}
         </a>
@@ -43,7 +43,7 @@ function Contact() {
         </label>
         <button
           type="submit"
-          className="cursor-pointer self-start rounded-[10px] border-[1.5px] border-canvas bg-accent px-[22px] py-3 font-semibold text-canvas shadow-light-sm transition-transform hover:-translate-y-0.5"
+          className="cursor-pointer self-start rounded-[10px] border-[1.5px] border-canvas bg-accent px-[22px] py-3 font-semibold text-on-accent shadow-light-sm transition-transform hover:-translate-y-0.5"
         >
           Send message
         </button>

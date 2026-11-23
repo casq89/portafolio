@@ -1,6 +1,8 @@
 import { Link } from 'react-router';
-import { cvUrl, navLinks } from '../../data/portfolio';
+import { navLinks } from '../../data/portfolio';
 import Logo from '../Logo';
+import AccentPicker from './components/AccentPicker';
+import DownloadCvButton from './components/DownloadCvButton';
 
 function Navbar() {
   return (
@@ -22,12 +24,10 @@ function Navbar() {
         ))}
       </ul>
 
-      <a
-        href={cvUrl}
-        className="rounded-[10px] bg-accent px-[18px] py-2.5 font-semibold text-canvas transition-transform hover:-translate-y-0.5"
-      >
-        Download CV
-      </a>
+      <div className="flex items-center gap-2">
+        <DownloadCvButton />
+        <AccentPicker />
+      </div>
     </nav>
   );
 }

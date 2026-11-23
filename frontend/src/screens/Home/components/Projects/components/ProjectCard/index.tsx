@@ -17,7 +17,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       className={`group relative flex flex-col gap-3 rounded-[14px] border-[1.5px] border-fg bg-surface p-[18px] shadow-layer transition-transform hover:-translate-y-1 ${isMiddle ? 'md:mt-10' : ''}`}
     >
       <span
-        className={`absolute -top-3.5 right-4 z-10 rounded-lg border-[1.5px] border-canvas px-2.5 py-0.5 font-mono text-[0.72rem] font-bold text-canvas ${isMiddle ? 'bg-fg' : 'bg-accent'} ${tilts[index % tilts.length]}`}
+        className={`absolute -top-3.5 right-4 z-10 rounded-lg border-[1.5px] border-canvas px-2.5 py-0.5 font-mono text-[0.72rem] font-bold ${isMiddle ? 'bg-fg text-canvas' : 'bg-accent text-on-accent'} ${tilts[index % tilts.length]}`}
       >
         {project.category}
       </span>

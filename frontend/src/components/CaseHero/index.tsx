@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import { Link } from 'react-router';
 import type { CaseStudy } from '../../data/caseStudy';
+import BackLink from '../BackLink';
 
 interface CaseHeroProps {
   study: CaseStudy;
@@ -12,9 +12,7 @@ interface CaseHeroProps {
 function CaseHero({ study, visual }: CaseHeroProps) {
   return (
     <section className="py-10">
-      <Link to="/#projects" className="font-mono text-sm text-muted transition-colors hover:text-accent">
-        ← cd ~/projects
-      </Link>
+      <BackLink to="/#projects" path="~/projects" />
 
       <div className="mt-8 flex flex-wrap items-center gap-14">
         <div className="min-w-0 flex-[1_1_420px]">
@@ -43,7 +41,7 @@ function CaseHero({ study, visual }: CaseHeroProps) {
               href={study.link.url}
               target="_blank"
               rel="noreferrer"
-              className="mt-8 inline-block rounded-[10px] border-[1.5px] border-accent bg-accent px-[22px] py-3 font-semibold text-canvas shadow-light-sm transition-transform hover:-translate-y-0.5"
+              className="mt-8 inline-block rounded-[10px] border-[1.5px] border-accent bg-accent px-[22px] py-3 font-semibold text-on-accent shadow-light-sm transition-transform hover:-translate-y-0.5"
             >
               {study.link.label} ↗
             </a>

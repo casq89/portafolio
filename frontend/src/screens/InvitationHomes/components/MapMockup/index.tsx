@@ -46,7 +46,7 @@ function MapMockup() {
               key={pin.price}
               className={`absolute rounded-full border-[1.5px] px-2.5 py-1 font-mono text-[0.72rem] font-bold ${
                 pin.selected
-                  ? 'z-10 scale-110 border-canvas bg-accent text-canvas shadow-light-sm'
+                  ? 'z-10 scale-110 border-canvas bg-accent text-on-accent shadow-light-sm'
                   : 'border-canvas bg-fg text-canvas'
               }`}
               style={{ top: pin.top, left: pin.left }}

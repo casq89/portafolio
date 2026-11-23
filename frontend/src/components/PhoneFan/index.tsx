@@ -18,7 +18,7 @@ function PhoneFan({ shots, badge }: PhoneFanProps) {
       <PhoneShot shot={right} className="absolute top-[8%] right-0 w-[38%] rotate-6 shadow-layer-sm" />
       <PhoneShot shot={center} className="absolute top-0 left-[30%] z-10 w-[40%]" />
       {badge && (
-        <span className="absolute right-[6%] -bottom-2 z-20 rotate-3 rounded-lg border-[1.5px] border-canvas bg-accent px-2.5 py-0.5 font-mono text-[0.72rem] font-bold text-canvas">
+        <span className="absolute right-[6%] -bottom-2 z-20 rotate-3 rounded-lg border-[1.5px] border-canvas bg-accent px-2.5 py-0.5 font-mono text-[0.72rem] font-bold text-on-accent">
           {badge}
         </span>
       )}

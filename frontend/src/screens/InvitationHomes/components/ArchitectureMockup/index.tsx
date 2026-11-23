@@ -24,7 +24,7 @@ function ArchitectureMockup() {
                   <p className="font-display font-bold">{layer.name}</p>
                   <p className="font-mono text-xs text-subtle">{layer.detail}</p>
                   {layer.focus && (
-                    <span className="absolute -top-3 right-3 rotate-2 rounded-md border-[1.5px] border-canvas bg-accent px-2 py-px font-mono text-[0.68rem] font-bold text-canvas">
+                    <span className="absolute -top-3 right-3 rotate-2 rounded-md border-[1.5px] border-canvas bg-accent px-2 py-px font-mono text-[0.68rem] font-bold text-on-accent">
                       my focus
                     </span>
                   )}

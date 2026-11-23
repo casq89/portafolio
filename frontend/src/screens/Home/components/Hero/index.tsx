@@ -1,3 +1,6 @@
+import profilePhoto from '../../../../assets/profile/profile.webp';
+import { profile, skills } from '../../../../data/portfolio';
+
 function Hero() {
   return (
     <section
@@ -5,24 +8,32 @@ function Hero() {
       className="flex scroll-mt-8 flex-wrap items-center gap-14 py-8"
     >
       <div className="min-w-0 flex-[1_1_400px]">
-        <p className="mb-6 inline-block rounded-full border-[1.5px] border-accent px-3.5 py-1.5 font-mono text-xs text-accent">
-          ● available for projects
-        </p>
+        <div className="mb-6 flex items-center gap-4">
+          <p className="rounded-full border-[1.5px] border-accent px-3.5 py-1.5 font-mono text-xs text-accent">
+            ● available for projects
+          </p>
+          <img
+            src={profilePhoto}
+            alt="Camilo, portrait"
+            width={120}
+            height={120}
+            className="size-30 rounded-full border-[1.5px] border-fg object-cover shadow-layer-sm"
+          />
+        </div>
         <p className="mt-6 max-w-[480px] text-lg text-muted font-mono">
-          I'm Camilo, a software engineer who leads development teams without
-          leaving the code behind. I build web and mobile products with React,
-          React Native and Node.js, designing scalable architectures and
-          applying advanced patterns so they stay maintainable as they grow.
-          Hands on the keyboard, eyes on the big picture.
+          {profile.summary}
           {/* Decorative blinking cursor; stays still for users who prefer reduced motion. */}
-          <span aria-hidden="true" className="ml-1 text-accent motion-safe:animate-blink">
+          <span
+            aria-hidden="true"
+            className="ml-1 text-accent motion-safe:animate-blink"
+          >
             ▍
           </span>
         </p>
         <div className="mt-9 flex flex-wrap gap-3.5">
           <a
             href="#projects"
-            className="rounded-[10px] border-[1.5px] border-accent bg-accent px-[22px] py-3 font-semibold text-canvas shadow-light-sm transition-transform hover:-translate-y-0.5"
+            className="rounded-[10px] border-[1.5px] border-accent bg-accent px-[22px] py-3 font-semibold text-on-accent shadow-light-sm transition-transform hover:-translate-y-0.5"
           >
             See projects
           </a>
@@ -39,8 +50,6 @@ function Hero() {
     </section>
   );
 }
-
-const stack = ['react-native', 'react', 'node', 'nextjs', 'sql'];
 
 // Decorative composition: browser, terminal and socket notification layered on top of each other.
 function StackedWindows() {
@@ -103,21 +112,22 @@ function StackedWindows() {
               className="min-w-0 flex-1 outline-none"
             />
           </div>
-          {stack.map((tech) => (
-            // Negative margin + matching padding: the hover highlight spans the full terminal width.
-            <div
-              key={tech}
-              className="group -mx-[18px] px-[18px] transition-colors hover:bg-accent hover:text-canvas"
-            >
-              <span className="text-accent group-hover:text-canvas">✓</span> {tech}
-            </div>
-          ))}
+          {/* Shows five lines (line-height 1.9em) and scrolls the rest, so the window keeps its size.
+              The negative margin lives on the scroller so the hover highlight still spans the full width. */}
+          <div className="-mx-[18px] max-h-[9.5em] overflow-x-hidden overflow-y-auto [scrollbar-color:var(--color-accent)_var(--color-raised)] [scrollbar-width:thin]">
+            {skills.map((tech) => (
+              <div
+                key={tech}
+                className="group px-[18px] transition-colors hover:bg-accent hover:text-on-accent"
+              >
+                <span className="text-accent group-hover:text-on-accent">
+                  ✓
+                </span>{' '}
+                {tech}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className="absolute right-0 bottom-0 w-[56%] rotate-2 rounded-xl border-[1.5px] border-canvas bg-accent px-4 py-3 font-mono text-[0.8rem] text-canvas shadow-light">
-        <div className="font-bold">socket · event received</div>
-        <div>task:completed</div>
       </div>
     </div>
   );

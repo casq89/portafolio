@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 interface WindowProps {
-  title: string;
+  title?: string;
   meta?: string;
   highlighted?: boolean;
   className?: string;
@@ -15,7 +15,7 @@ function Window({ title, meta, highlighted = false, className = '', children }: 
   return (
     <div className={`overflow-hidden rounded-2xl border-[1.5px] bg-surface ${border} ${className}`}>
       <div className="flex items-center justify-between gap-4 border-b-[1.5px] border-edge px-[18px] py-3 font-mono text-xs text-subtle">
-        <span>{title}</span>
+        {title && <span>{title}</span>}
         {meta && <span>{meta}</span>}
       </div>
       {children}

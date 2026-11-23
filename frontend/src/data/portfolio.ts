@@ -34,6 +34,7 @@ export const navLinks: NavLink[] = [
   { label: 'projects', href: '/#projects' },
   { label: 'demos', href: '/#demos' },
   { label: 'contact', href: '/#contact' },
+  { label: 'hobbies', href: '/hobbies' },
 ];
 
 export const projects: Project[] = [
@@ -84,4 +85,23 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const email = 'casq89@gmail.com';
-export const cvUrl = '#';
+
+/** Who I am: shown in the Hero and used to build the downloadable CV. */
+export const profile = {
+  name: 'Camilo Sanchez',
+  role: 'Software Engineer',
+  summary:
+    "I'm Camilo, a software engineer who leads development teams without leaving the code behind. I build web and mobile products with React, React Native and Node.js, designing scalable architectures and applying advanced patterns so they stay maintainable as they grow. Hands on the keyboard, eyes on the big picture.",
+};
+
+/** Tech stack, listed in the Hero terminal and in the CV. */
+export const skills = [
+  'react-native',
+  'react',
+  'node',
+  'nextjs',
+  'sql',
+  'advanced-js-patterns',
+  'frontend-design-patterns',
+  'unit-and-integration-tests',
+];

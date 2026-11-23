@@ -18,7 +18,7 @@ function WhatsAppMockup() {
               key={index}
               className={`max-w-[80%] rounded-xl border-[1.5px] px-3.5 py-2 ${
                 message.from === 'agent'
-                  ? 'self-end rounded-br-sm border-canvas bg-accent text-canvas'
+                  ? 'self-end rounded-br-sm border-canvas bg-accent text-on-accent'
                   : 'self-start rounded-bl-sm border-edge bg-raised'
               }`}
             >

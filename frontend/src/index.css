@@ -10,7 +10,9 @@
   --color-fg: #ededf0;
   --color-muted: #b9b9c3;
   --color-subtle: #8f8f9b;
+  /* Accent and on-accent are overridden at runtime by the accent picker (see lib/accent.ts) */
   --color-accent: #ff8a3d;
+  --color-on-accent: #0c0c0e;
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
