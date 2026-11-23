@@ -1,5 +1,5 @@
-import SectionHeader from '../SectionHeader';
-import Window from '../Window';
+import SectionHeader from '../../../../components/SectionHeader';
+import Window from '../../../../components/Window';
 
 const taskStates = ['waiting', 'active', 'completed'] as const;
 
@@ -16,7 +16,7 @@ function Demos() {
         <Window title="demo/01 — redis + bullmq" meta="coming soon" className="w-full max-w-[680px]">
           <div className="flex flex-col gap-3.5 p-6 md:pb-[130px]">
             <h3 className="font-display text-3xl font-bold">Task queue</h3>
-            <p className="max-w-[460px] text-muted">
+            <p className="max-w-[460px] font-mono text-muted">
               Send a task, it gets queued in Redis and a worker processes it. Watch it move through each state.
             </p>
             <ol className="flex flex-wrap items-center gap-2 font-mono text-sm">
@@ -53,7 +53,7 @@ function Demos() {
         >
           <div className="flex flex-col gap-3.5 p-6">
             <h3 className="font-display text-3xl font-bold">Real time</h3>
-            <p className="text-muted">The server notifies the browser as soon as something finishes, no page reload.</p>
+            <p className="font-mono text-muted">The server notifies the browser as soon as something finishes, no page reload.</p>
             <div className="overflow-x-auto rounded-[10px] border-[1.5px] border-edge bg-canvas px-4 py-3.5 font-mono text-[0.82rem] leading-[1.9] whitespace-nowrap">
               <div className="text-subtle">→ socket connected</div>
               <div>

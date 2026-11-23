@@ -1,5 +1,5 @@
 import type { FormEvent } from 'react';
-import { email } from '../../data/portfolio';
+import { email } from '../../../../data/portfolio';
 
 const fieldClass =
   'rounded-[10px] border-[1.5px] border-edge-strong bg-canvas p-3 font-sans text-base text-fg outline-none focus:border-accent';
@@ -16,7 +16,7 @@ function Contact() {
       <div className="min-w-0 flex-[1_1_320px] pt-3">
         <p className="mb-2 font-mono text-sm text-accent">~/contact</p>
         <h2 className="font-display text-4xl leading-none font-bold tracking-tight sm:text-6xl">Let's build something</h2>
-        <p className="mt-5 max-w-[400px] text-muted">Got a project or an opening? Write to me and I'll get back to you soon.</p>
+        <p className="mt-5 max-w-[400px] font-mono text-muted">Got a project or an opening? Write to me and I'll get back to you soon.</p>
         <a
           href={`mailto:${email}`}
           className="mt-8 inline-block -rotate-3 rounded-xl border-[1.5px] border-canvas bg-accent px-[18px] py-3.5 font-mono text-sm font-bold text-canvas shadow-light"

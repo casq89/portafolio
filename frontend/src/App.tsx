@@ -1,18 +1,20 @@
-import Contact from './components/Contact';
-import Demos from './components/Demos';
-import Experience from './components/Experience';
-import Hero from './components/Hero';
+import { Navigate, Route, Routes } from 'react-router';
 import Layout from './components/Layout';
-import Projects from './components/Projects';
+import BritishAirways from './screens/BritishAirways';
+import Home from './screens/Home';
+import InvitationHomes from './screens/InvitationHomes';
+import Konecta from './screens/Konecta';
 
 function App() {
   return (
     <Layout>
-      <Hero />
-      <Projects />
-      <Demos />
-      <Experience />
-      <Contact />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/konecta" element={<Konecta />} />
+        <Route path="/invitation-homes" element={<InvitationHomes />} />
+        <Route path="/british-airways" element={<BritishAirways />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </Layout>
   );
 }

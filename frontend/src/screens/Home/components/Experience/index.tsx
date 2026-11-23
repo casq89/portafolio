@@ -1,6 +1,6 @@
-import { jobs } from '../../data/portfolio';
-import SectionHeader from '../SectionHeader';
-import Window from '../Window';
+import { jobs } from '../../../../data/portfolio';
+import SectionHeader from '../../../../components/SectionHeader';
+import Window from '../../../../components/Window';
 
 function Experience() {
   return (
@@ -17,7 +17,7 @@ function Experience() {
                 <h3 className="font-display text-xl font-bold">
                   {job.role} · {job.company}
                 </h3>
-                <p className="mt-1 text-muted">{job.description}</p>
+                <p className="mt-1 font-mono text-muted">{job.description}</p>
               </div>
             </li>
           ))}

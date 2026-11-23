@@ -1,20 +1,19 @@
 function Hero() {
   return (
-    <section id="home" className="flex scroll-mt-8 flex-wrap items-center gap-14 py-24">
+    <section
+      id="home"
+      className="flex scroll-mt-8 flex-wrap items-center gap-14 py-8"
+    >
       <div className="min-w-0 flex-[1_1_400px]">
         <p className="mb-6 inline-block rounded-full border-[1.5px] border-accent px-3.5 py-1.5 font-mono text-xs text-accent">
           ● available for projects
         </p>
-        <h1 className="font-display text-5xl leading-[1.02] font-bold tracking-tighter sm:text-7xl">
-          Full stack.
-          <br />
-          From the browser
-          <br />
-          <span className="text-accent">to the server.</span>
-        </h1>
-        <p className="mt-6 max-w-[480px] text-lg text-muted">
-          I'm [your name]. [One or two sentences about what you build: React interfaces, Node APIs, real-time
-          features and job queues.]
+        <p className="mt-6 max-w-[480px] text-lg text-muted font-mono">
+          I'm Camilo, a software engineer who leads development teams without
+          leaving the code behind. I build web and mobile products with React,
+          React Native and Node.js, designing scalable architectures and
+          applying advanced patterns so they stay maintainable as they grow.
+          Hands on the keyboard, eyes on the big picture.
         </p>
         <div className="mt-9 flex flex-wrap gap-3.5">
           <a
@@ -37,10 +36,15 @@ function Hero() {
   );
 }
 
+const stack = ['react-native', 'react', 'node', 'nextjs', 'sql'];
+
 // Decorative composition: browser, terminal and socket notification layered on top of each other.
 function StackedWindows() {
   return (
-    <div aria-hidden="true" className="relative h-[470px] min-w-0 flex-[1_1_440px]">
+    <div
+      aria-hidden="true"
+      className="relative h-[470px] min-w-0 flex-[1_1_440px]"
+    >
       <div className="absolute top-0 left-0 h-[290px] w-4/5 overflow-hidden rounded-[14px] border-[1.5px] border-edge bg-surface">
         <div className="flex items-center gap-2 border-b-[1.5px] border-edge px-3.5 py-2.5">
           <span className="size-2.5 rounded-full bg-edge-strong" />
@@ -69,15 +73,11 @@ function StackedWindows() {
         </div>
         <div className="overflow-x-auto px-[18px] py-4 leading-[1.9] whitespace-nowrap">
           <div className="text-subtle">$ npm run dev</div>
-          <div>
-            <span className="text-accent">✓</span> express on :3000
-          </div>
-          <div>
-            <span className="text-accent">✓</span> redis connected
-          </div>
-          <div>
-            <span className="text-accent">✓</span> worker "tasks" running
-          </div>
+          {stack.map((tech) => (
+            <div key={tech}>
+              <span className="text-accent">✓</span> {tech}
+            </div>
+          ))}
         </div>
       </div>
 
