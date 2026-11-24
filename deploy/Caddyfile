@@ -1,0 +1,19 @@
+# Copy of /etc/caddy/Caddyfile on the VPS. This repo does not deploy it:
+# after editing, copy it to the VPS and run `sudo systemctl reload caddy`.
+casq89.com, www.casq89.com {
+	encode gzip
+
+	handle /api/* {
+		reverse_proxy 127.0.0.1:3000
+	}
+
+	handle /socket.io/* {
+		reverse_proxy 127.0.0.1:3000
+	}
+
+	handle {
+		root * /var/www/portafolio
+		try_files {path} /index.html
+		file_server
+	}
+}

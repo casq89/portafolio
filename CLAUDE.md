@@ -10,12 +10,22 @@ Frontend (`cd frontend`):
 - `npm run lint`: ESLint
 
 Backend (`cd backend`):
-- `npm run dev`: `tsx watch src/server.ts`
+- `npm run dev`: `tsx watch src/server.ts`, loading `backend/.env` if it exists (copy `backend/.env.example`; needed for the contact form)
 - `npm run build`: compiles with `tsc` to `dist/`
 - `npm start`: runs `dist/server.js`
-- Requires a running Redis instance (default `redis://127.0.0.1:6379`)
+- `npm run redis`: starts the local Redis container with Docker (creates it the first time); `npm run redis:stop` stops it
+- See "Backend local setup" below before running it the first time
 
 There are no tests yet.
+
+## Backend local setup
+
+1. **Redis** (needed by the BullMQ `tasks` queue): Docker Desktop must be open (status "Engine running"). Then run `npm run redis` in `backend/`. It starts the `redis` container, or creates it the first time with `--restart unless-stopped` on port 6379, so it comes back on its own whenever Docker Desktop starts. Check it with `docker ps` (status `Up`).
+   - `ECONNREFUSED 127.0.0.1:6379` in the backend console means Redis is not running. The server still starts and keeps retrying, and it connects on its own once Redis is up, without a restart.
+   - `error during connect ... dockerDesktopLinuxEngine` means Docker Desktop is not open.
+   - The contact form does not depend on Redis: `/api/contact` works without it.
+2. **Environment**: copy `backend/.env.example` to `backend/.env` (gitignored) and fill in `RESEND_API_KEY` (use a separate local key, not the production one) and `CONTACT_TO`. `npm run dev` loads it automatically (needs Node 22.9 or later for `--env-file-if-exists`).
+3. Run `npm run dev` in `backend/` and in `frontend/`. Vite proxies `/api` and `/socket.io` to the backend.
 
 ## Architecture
 
@@ -28,12 +38,13 @@ There are no tests yet.
   - Styling: Tailwind CSS 4 via `@tailwindcss/vite`, no config file. Design tokens (colors, fonts, offset shadows) are defined in `@theme` in `src/index.css`; use those utilities (`bg-surface`, `text-muted`, `shadow-layer`…) instead of raw hex values.
   - The accent color is switchable at runtime (Navbar `AccentPicker`, options in `data/accents.ts`, applied by `lib/accent.ts` and saved in `localStorage`). Text on an accent background must use `text-on-accent`, never `text-canvas`, so it stays readable on every accent.
   - TypeScript is pinned to `~6.0` because `typescript-eslint` does not support TypeScript 7 yet. Do not upgrade it until it does.
-- **Backend**: everything currently lives in `src/server.ts`:
-  - Express 5 with REST routes under `/api` (`GET /api/health`, `POST /api/tasks`)
+- **Backend**: almost everything lives in `src/server.ts`:
+  - Express 5 with REST routes under `/api` (`GET /api/health`, `POST /api/tasks`, `POST /api/contact`)
+  - `src/contact.ts`: the contact form route. It validates the payload, ignores bots through a hidden `website` honeypot field, rate-limits in memory (5 per IP per hour) and sends the email through the Resend HTTP API (`fetch`, no SDK) to `CONTACT_TO`, with `Reply-To` set to the visitor. It does not use Redis or BullMQ, on purpose: keep it that way.
   - Socket.IO to notify the client (`task:completed` event)
   - BullMQ + ioredis for the `tasks` queue
 - **Communication**: in development, Vite proxies `/api` and `/socket.io` (WebSocket) to `http://127.0.0.1:3000` (see `frontend/vite.config.ts`). The frontend uses relative paths (`/api/...`), never the full backend URL.
-- **Backend config** comes from environment variables: `PORT` (3000), `HOST` (127.0.0.1) and `REDIS_URL`.
+- **Backend config** comes from environment variables: `PORT` (3000), `HOST` (127.0.0.1), `REDIS_URL`, plus `RESEND_API_KEY`, `CONTACT_TO` and optional `CONTACT_FROM` for the contact form (without them `/api/contact` answers 503).
 
 ## Deployment
 
@@ -41,6 +52,12 @@ GitHub Actions in `.github/workflows/` run on push to `main`, depending on which
 - `deploy.yml`: builds the frontend and rsyncs it to `/var/www/portafolio/` on the VPS
 - `deploy-backend.yml`: builds the backend, rsyncs it to `/srv/backend/` and runs `systemctl restart backend`
 - VPS credentials live in GitHub secrets (`dev` environment). Never put them in the code.
+
+## Server (VPS) and email
+
+- Caddy serves the frontend and proxies `/api` and `/socket.io` to the backend, which runs as the systemd service `backend` with secrets in `/etc/backend.env`. Redis runs on the same VPS. Details, commands and the reference copies in `deploy/`: `docs/server.md`.
+- There is no mail server: Cloudflare Email Routing receives `contacto@casq89.com` and forwards it to Gmail, and Resend sends (contact form and Gmail replies). Setup, DNS records and troubleshooting: `docs/email.md`.
+- The repo is public: never write secrets, the VPS IP or the SSH user (the `VPS_USER` secret) in it.
 
 ## Conventions
 

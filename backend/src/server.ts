@@ -3,6 +3,7 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { Queue, Worker } from 'bullmq';
 import { Redis } from 'ioredis';
+import { contactRouter } from './contact.js';
 
 interface TaskData {
   message: string;
@@ -17,7 +18,10 @@ const HOST = process.env.HOST ?? '127.0.0.1';
 const REDIS_URL = process.env.REDIS_URL ?? 'redis://127.0.0.1:6379';
 
 const app = express();
+// Caddy runs on the same host: trust it so req.ip is the visitor's IP.
+app.set('trust proxy', 'loopback');
 app.use(express.json());
+app.use('/api/contact', contactRouter);
 
 const httpServer = createServer(app);
 const io = new Server<{}, ServerToClientEvents>(httpServer);

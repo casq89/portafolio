@@ -1,14 +1,37 @@
-import type { FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { email } from '../../../../data/portfolio';
+
+type Status = 'idle' | 'sending' | 'sent' | 'error';
+
+const statusMessages: Record<Exclude<Status, 'idle'>, string> = {
+  sending: 'Sending...',
+  sent: "Thanks! Your message is on its way. I'll get back to you soon.",
+  error: `Something went wrong. Please try again or write to ${email}.`,
+};
 
 const fieldClass =
   'rounded-[10px] border-[1.5px] border-edge-strong bg-canvas p-3 font-sans text-base text-fg outline-none focus:border-accent';
 const labelClass = 'flex flex-col gap-1.5 font-mono text-sm text-muted';
 
 function Contact() {
-  // TODO: send the message to the backend.
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [status, setStatus] = useState<Status>('idle');
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
+    setStatus('sending');
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      if (!response.ok) throw new Error(`Contact request failed: ${response.status}`);
+      form.reset();
+      setStatus('sent');
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -31,22 +54,30 @@ function Contact() {
       >
         <label className={labelClass}>
           name
-          <input type="text" name="name" required className={fieldClass} />
+          <input type="text" name="name" required maxLength={100} className={fieldClass} />
         </label>
         <label className={labelClass}>
           email
-          <input type="email" name="email" required className={fieldClass} />
+          <input type="email" name="email" required maxLength={200} className={fieldClass} />
         </label>
         <label className={labelClass}>
           message
-          <textarea name="message" rows={4} required className={`${fieldClass} resize-y`} />
+          <textarea name="message" rows={4} required maxLength={5000} className={`${fieldClass} resize-y`} />
         </label>
+        {/* Honeypot: hidden from people, bots tend to fill it in. */}
+        <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
         <button
           type="submit"
-          className="cursor-pointer self-start rounded-[10px] border-[1.5px] border-canvas bg-accent px-[22px] py-3 font-semibold text-on-accent shadow-light-sm transition-transform hover:-translate-y-0.5"
+          disabled={status === 'sending'}
+          className="cursor-pointer self-start rounded-[10px] border-[1.5px] border-canvas bg-accent px-[22px] py-3 font-semibold text-on-accent shadow-light-sm transition-transform hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60 disabled:hover:translate-y-0"
         >
           Send message
         </button>
+        {status !== 'idle' && (
+          <p role="status" className={`font-mono text-sm ${status === 'error' ? 'text-red-400' : 'text-muted'}`}>
+            {statusMessages[status]}
+          </p>
+        )}
       </form>
     </section>
   );

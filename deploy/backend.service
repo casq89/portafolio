@@ -1,0 +1,23 @@
+# Copy of /etc/systemd/system/backend.service on the VPS. This repo does not deploy it:
+# after editing, copy it to the VPS and run
+# `sudo systemctl daemon-reload && sudo systemctl restart backend`.
+# <vps-user> is a placeholder: the real user is the VPS_USER GitHub secret.
+[Unit]
+Description=Backend del portafolio
+After=network.target redis-server.service
+Wants=redis-server.service
+
+[Service]
+Type=simple
+User=<vps-user>
+WorkingDirectory=/srv/backend
+ExecStart=/usr/bin/node dist/server.js
+Environment=NODE_ENV=production
+# Secrets (RESEND_API_KEY, CONTACT_TO). See deploy/backend.env.example.
+EnvironmentFile=/etc/backend.env
+Restart=always
+RestartSec=3
+MemoryMax=768M
+
+[Install]
+WantedBy=multi-user.target
