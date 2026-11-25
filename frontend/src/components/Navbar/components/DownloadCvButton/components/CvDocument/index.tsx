@@ -1,5 +1,4 @@
 import { Document, Font, Image, Link, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
-import { hobbies } from '../../../../../../data/hobbies';
 import { email, profile, projects, skills, socialLinks } from '../../../../../../data/portfolio';
 
 interface CvDocumentProps {
@@ -110,31 +109,21 @@ function CvDocument({ accent, photo, siteUrl }: CvDocumentProps) {
           {experience.map((project) => (
             <View key={project.name} style={s.job} wrap={false}>
               <View style={s.jobHeader}>
-                <Text style={s.jobTitle}>{`${project.category} developer`.toUpperCase()}</Text>
+                <Text style={s.jobTitle}>{(project.cv?.title ?? `${project.category} developer`).toUpperCase()}</Text>
                 {project.period && <Text style={s.jobPeriod}>{project.period}</Text>}
               </View>
               <Text style={s.jobCompany}>
                 {project.name}
                 {project.via ? ` · via ${project.via}` : ''}
               </Text>
-              <View style={s.bullet}>
-                <Text style={s.bulletMark}>•</Text>
-                <Text style={s.bulletText}>{project.description}</Text>
-              </View>
+              {(project.cv?.points ?? [project.description]).map((point) => (
+                <View key={point} style={s.bullet}>
+                  <Text style={s.bulletMark}>•</Text>
+                  <Text style={s.bulletText}>{point}</Text>
+                </View>
+              ))}
             </View>
-          ))}
-
-          <Text style={s.heading}>Interests</Text>
-          {hobbies.map((hobby) => (
-            <View key={hobby.name} style={s.bullet}>
-              <Text style={s.bulletMark}>•</Text>
-              <Text style={s.bulletText}>
-                <Text style={s.strong}>{hobby.name}. </Text>
-                {hobby.description}
-              </Text>
-            </View>
-          ))}
-        </View>
+          ))}        </View>
       </Page>
     </Document>
   );
@@ -177,7 +166,6 @@ function createStyles(accent: string, accentText: string) {
     bullet: { flexDirection: 'row', gap: 6, paddingLeft: 6, marginBottom: 5 },
     bulletMark: { width: 6 },
     bulletText: { flex: 1 },
-    strong: { fontWeight: 'bold' },
   });
 }
 

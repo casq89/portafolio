@@ -1,12 +1,12 @@
 // Case study content for the Invitation Homes mobile app (screens/InvitationHomes).
 // Screenshots come from the app's App Store listing.
 
-import checklist from '../assets/invitation-homes/checklist.jpg';
-import cover from '../assets/invitation-homes/cover.jpg';
-import lease from '../assets/invitation-homes/lease.jpg';
-import payments from '../assets/invitation-homes/payments.jpg';
-import search from '../assets/invitation-homes/search.jpg';
-import tour from '../assets/invitation-homes/tour.jpg';
+import checklist from '../assets/invitation-homes/checklist.webp';
+import cover from '../assets/invitation-homes/cover.webp';
+import lease from '../assets/invitation-homes/lease.webp';
+import payments from '../assets/invitation-homes/payments.webp';
+import search from '../assets/invitation-homes/search.webp';
+import tour from '../assets/invitation-homes/tour.webp';
 import type { CaseStudy, CaseStudyFeature, Screenshot } from './caseStudy';
 
 export type InvitationHomesFeatureId = 'map' | 'tours' | 'residents' | 'architecture';
@@ -24,12 +24,12 @@ export const invitationHomes: CaseStudy = {
   path: '~/projects/invitation-homes',
   name: 'Invitation Homes',
   via: '10Pearls',
-  tagline: 'Find, tour, rent and live in a home, all from one app.',
+  tagline: 'Full stack at 10Pearls, from the app to the cloud.',
   intro:
-    "Invitation Homes is a U.S. single-family home rental company, and this is its app for iOS and Android. Through 10Pearls, I was part of the team that built it, focused on the frontend: the React Native app that takes people from an interactive map search to touring a home, moving in, and paying rent once they live there.",
+    'At 10Pearls I worked as a full stack web developer on the Invitation Homes project, the iOS and Android app of a U.S. single-family home rental company. I worked across the whole stack: the React Native app that takes people from an interactive map search to paying rent, the Node.js services running on AWS Lambda behind it, and the infrastructure defined in Terraform.',
   tags: ['react-native', 'ios', 'android', 'maps', 'node', 'aws lambda', 'terraform'],
   highlights: [
-    { label: 'role', value: 'Senior frontend developer' },
+    { label: 'role', value: 'Full stack web developer' },
     { label: 'platforms', value: 'iOS · Android' },
     { label: 'app store', value: '4.9 ★ rating' },
   ],
@@ -62,7 +62,7 @@ export const invitationHomesFeatures: CaseStudyFeature<InvitationHomesFeatureId>
     id: 'architecture',
     kicker: '04 · architecture',
     title: 'Built to scale',
-    body: 'One React Native codebase for iOS and Android, organized with advanced design patterns so features can grow without turning into a tangle. Behind it, a Node.js backend running on AWS Lambda with infrastructure defined in Terraform. My focus was the app, working closely with that stack.',
+    body: 'One React Native codebase for iOS and Android, organized with advanced design patterns so features can grow without turning into a tangle. Behind it, a Node.js backend running on AWS Lambda with infrastructure defined in Terraform. I worked on both sides: the app and the services and infrastructure behind it.',
     points: [
       'One codebase for iOS and Android',
       'Advanced design patterns in React Native',

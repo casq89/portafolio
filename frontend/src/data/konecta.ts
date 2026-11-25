@@ -1,9 +1,9 @@
 // Case study content for the KCRM project at Konecta (screens/Konecta).
 
-import kcrmCover from '../assets/kcrm-cover.png';
+import kcrmCover from '../assets/kcrm-cover.webp';
 import type { CaseStudy, CaseStudyFeature } from './caseStudy';
 
-export type KonectaFeatureId = 'campaigns' | 'whatsapp' | 'reports' | 'batch';
+export type KonectaFeatureId = 'campaigns' | 'whatsapp' | 'reports';
 
 export const konectaCover = { src: kcrmCover, alt: 'KCRM by Konecta logo over a network of connected nodes' };
 
@@ -11,9 +11,9 @@ export const konecta: CaseStudy = {
   path: '~/projects/kcrm',
   name: 'KCRM',
   client: 'Konecta',
-  tagline: 'The CRM behind a contact-center operation.',
+  tagline: 'From full stack developer to development team lead.',
   intro:
-    "KCRM is the web CRM Konecta's contact-center operation runs on. I worked across the whole platform: the tools to create and run every kind of inbound and outbound campaign, WhatsApp chat campaigns, reporting on top of DB2 databases, and the batch processes and crons that keep the data moving behind the scenes.",
+    "At Konecta I worked on the campaigns embedded in KCRM, the web CRM its contact-center operation runs on. As a full stack developer I owned features end to end, from the backend and DB2 databases to the frontend and the web solutions around them, while also managing projects from scope to delivery. In a second stage I led the development team, setting priorities, reviewing code and keeping the platform moving.",
   tags: ['php', 'javascript', 'react', 'node', 'db2', 'cron', 'whatsapp'],
   highlights: [
     { label: 'campaigns', value: 'inbound · outbound · chat' },
@@ -51,12 +51,5 @@ export const konectaFeatures: CaseStudyFeature<KonectaFeatureId>[] = [
     title: 'Reports on DB2',
     body: "Reports built by querying DB2 databases, turning the operation's raw data into the numbers supervisors and clients rely on to make decisions.",
     points: ['SQL queries against DB2', 'Operational and client-facing reports', 'Exports for the business teams'],
-  },
-  {
-    id: 'batch',
-    kicker: '04 · automation',
-    title: 'Batch processes and crons',
-    body: 'Scheduled batch processes and cron jobs for data loads, syncs and report generation, running unattended so the operation starts every day with fresh data.',
-    points: ['Nightly data loads and syncs', 'Scheduled report generation', 'Logs to trace every run'],
   },
 ];

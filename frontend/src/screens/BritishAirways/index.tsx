@@ -14,9 +14,7 @@ import ArchitectureMockup from './components/ArchitectureMockup';
 const visuals: Record<BritishAirwaysFeatureId, ReactNode> = {
   architecture: <ArchitectureMockup />,
   booking: <PhonePair shots={[screens.booking, screens.manage]} />,
-  dayOfTravel: <PhonePair shots={[screens.dayOfTravel, screens.liveActivity]} />,
-  rewards: <PhonePair shots={[screens.rewards, screens.cover]} />,
-};
+  dayOfTravel: <PhonePair shots={[screens.dayOfTravel, screens.liveActivity]} />,};
 
 // Case study of the British Airways mobile app.
 function BritishAirways() {

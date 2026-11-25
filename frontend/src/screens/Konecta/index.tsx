@@ -2,7 +2,6 @@ import type { ReactNode } from 'react';
 import CaseHero from '../../components/CaseHero';
 import FeatureRow from '../../components/FeatureRow';
 import { konecta, konectaFeatures, type KonectaFeatureId } from '../../data/konecta';
-import BatchMockup from './components/BatchMockup';
 import CampaignsMockup from './components/CampaignsMockup';
 import CoverWindow from './components/CoverWindow';
 import ReportsMockup from './components/ReportsMockup';
@@ -12,7 +11,6 @@ const visuals: Record<KonectaFeatureId, ReactNode> = {
   campaigns: <CampaignsMockup />,
   whatsapp: <WhatsAppMockup />,
   reports: <ReportsMockup />,
-  batch: <BatchMockup />,
 };
 
 // Case study of the KCRM project at Konecta.

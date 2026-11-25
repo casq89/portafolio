@@ -1,15 +1,14 @@
 // Case study content for the British Airways mobile app (screens/BritishAirways).
 // Screenshots come from the app's App Store listing.
 
-import booking from '../assets/british-airways/booking.jpg';
-import cover from '../assets/british-airways/cover.jpg';
-import dayOfTravel from '../assets/british-airways/day-of-travel.jpg';
-import liveActivity from '../assets/british-airways/live-activity.jpg';
-import manage from '../assets/british-airways/manage.jpg';
-import rewards from '../assets/british-airways/rewards.jpg';
+import booking from '../assets/british-airways/booking.webp';
+import cover from '../assets/british-airways/cover.webp';
+import dayOfTravel from '../assets/british-airways/day-of-travel.webp';
+import liveActivity from '../assets/british-airways/live-activity.webp';
+import manage from '../assets/british-airways/manage.webp';
 import type { CaseStudy, CaseStudyFeature, Screenshot } from './caseStudy';
 
-export type BritishAirwaysFeatureId = 'architecture' | 'booking' | 'dayOfTravel' | 'rewards';
+export type BritishAirwaysFeatureId = 'architecture' | 'booking' | 'dayOfTravel';
 
 export const britishAirwaysScreens = {
   cover: { src: cover, alt: 'British Airways app: Your journey starts here' },
@@ -17,20 +16,19 @@ export const britishAirwaysScreens = {
   manage: { src: manage, alt: 'Manage booking screen with seats, baggage and passenger details' },
   dayOfTravel: { src: dayOfTravel, alt: 'Day of travel screen with gate status, gate, seat and boarding group' },
   liveActivity: { src: liveActivity, alt: 'Lock screen Live Activity with the flight status' },
-  rewards: { src: rewards, alt: 'British Airways Club membership cards with Avios and tier points' },
 } satisfies Record<string, Screenshot>;
 
 export const britishAirways: CaseStudy = {
   path: '~/projects/british-airways',
   name: 'British Airways',
   via: 'Globant',
-  tagline: 'The airline in your pocket, from booking to boarding.',
+  tagline: 'From frontend developer to Tech Lead at Globant.',
   intro:
-    "British Airways' app for iOS and Android, where travellers book flights, manage their trips, get through the day of travel and keep track of their rewards. Working on it through Globant, it's the largest and most complex project I've been part of: a large-scale React Native codebase with a modular architecture built to grow.",
+    "At Globant I work on the British Airways app for iOS and Android, used by millions of travellers around the world to book flights, manage their trips, get through the day of travel and track their rewards. It's the most robust project I've been part of, with more than 500 people involved. I started as a frontend developer on its React Native codebase and, in a second stage, stepped up as Tech Lead, leading a development team within the project.",
   tags: ['react-native', 'ios', 'android', 'modular architecture'],
   highlights: [
-    { label: 'role', value: 'Senior frontend developer' },
-    { label: 'architecture', value: 'Modular, at scale' },
+    { label: 'role', value: 'Frontend developer → Tech Lead' },
+    { label: 'scale', value: '500+ people · millions of users' },
     { label: 'app store', value: '4.5 ★ · 278K ratings' },
   ],
   link: { label: 'View on the App Store', url: 'https://apps.apple.com/us/app/british-airways/id284793089' },
@@ -57,12 +55,5 @@ export const britishAirwaysFeatures: CaseStudyFeature<BritishAirwaysFeatureId>[]
     title: 'With you on the day of travel',
     body: 'Gate status, seat and boarding group at a glance, plus live flight updates right on the lock screen, so nobody has to dig for information at the airport.',
     points: ['Gate, seat and boarding info', 'Live Activities on the lock screen', 'Real-time flight status'],
-  },
-  {
-    id: 'rewards',
-    kicker: '04 · loyalty',
-    title: 'Rewards in one place',
-    body: 'The British Airways Club membership card, Avios and tier points always at hand inside the app.',
-    points: ['Digital membership card', 'Avios and tier points', 'Membership tiers'],
   },
 ];

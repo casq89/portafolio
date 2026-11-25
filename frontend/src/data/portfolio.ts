@@ -1,6 +1,6 @@
 // Portfolio content. Text in square brackets is placeholder copy to fill in.
 
-import kcrmCover from '../assets/kcrm-cover.png';
+import kcrmCover from '../assets/kcrm-cover.webp';
 import { britishAirwaysScreens } from './britishAirways';
 import { invitationHomesScreens } from './invitationHomes';
 
@@ -15,6 +15,8 @@ export interface Project {
   category: string;
   /** Internal route with the project's case study; makes the whole card clickable. */
   route?: string;
+  /** Experience entry for the downloadable CV, written in CV style (no first person). */
+  cv?: { title: string; points: string[] };
   /** Years worked on the project, shown under the title, e.g. "2018 — 2022". */
   period?: string;
   /** Consultancy the work was done through, shown next to the period as "via <name>". */
@@ -41,18 +43,35 @@ export const projects: Project[] = [
   {
     name: 'KCRM · Konecta',
     description:
-      'Web CRM for a contact-center operation: inbound, outbound and WhatsApp campaigns, DB2 reporting and the batch jobs behind it.',
+      'Full stack developer on the CRM behind a contact-center operation: backend, frontend and DB2, managing projects end to end and later leading the development team.',
     category: 'full stack',
     route: '/konecta',
+    cv: {
+      title: 'Full stack developer / Team lead',
+      points: [
+        "Developed inbound, outbound and WhatsApp chat campaigns embedded in KCRM, the web CRM behind Konecta's contact-center operation.",
+        'Built features end to end across backend, frontend and web solutions, with DB2 as the database engine.',
+        'Managed projects from scope to delivery.',
+        'Led the development team in a second stage: setting priorities, reviewing code and keeping the platform moving.',
+      ],
+    },
     period: '2018 — 2022',
     image: { src: kcrmCover, alt: 'KCRM by Konecta logo over a network of connected nodes' },
   },
   {
     name: 'Invitation Homes',
     description:
-      'iOS and Android app to find, tour, rent and live in a home, with an interactive map search built on a native maps SDK. Frontend in React Native.',
+      'Full stack developer at 10Pearls on a home rental app for iOS and Android: React Native on the front, Node.js on AWS Lambda behind it and infrastructure in Terraform.',
     category: 'mobile',
     route: '/invitation-homes',
+    cv: {
+      title: 'Full stack web developer',
+      points: [
+        'Built the Invitation Homes app for iOS and Android with React Native, from interactive map search and home tours to move-in and rent payments.',
+        'Developed the Node.js services behind it, running on AWS Lambda.',
+        'Defined and maintained the infrastructure as code with Terraform.',
+      ],
+    },
     period: '2022 — 2024',
     via: '10Pearls',
     image: {
@@ -64,9 +83,17 @@ export const projects: Project[] = [
   {
     name: 'British Airways',
     description:
-      'The airline’s iOS and Android app: booking, trip management, day of travel and rewards. A large-scale React Native codebase with a modular architecture.',
+      'Frontend developer turned Tech Lead at Globant on the airline’s React Native app, used by millions worldwide, in a project of more than 500 people.',
     category: 'mobile',
     route: '/british-airways',
+    cv: {
+      title: 'Frontend developer / Tech Lead',
+      points: [
+        'Working on the British Airways app for iOS and Android, used by millions of travellers worldwide, in a project of more than 500 people.',
+        'Developed features in a large-scale React Native codebase: booking, trip management and day of travel.',
+        'Promoted to Tech Lead in a second stage, leading a development team within the project.',
+      ],
+    },
     period: '2024 — present',
     via: 'Globant',
     image: {
@@ -77,14 +104,14 @@ export const projects: Project[] = [
   },
 ];
 
+export const email = 'contacto@casq89.com';
+
 export const socialLinks: SocialLink[] = [
   { name: 'GitHub', url: 'https://github.com/casq89' },
   // TODO: replace with the personal LinkedIn profile URL.
   { name: 'LinkedIn', url: 'https://www.linkedin.com' },
-  { name: 'Email', url: 'mailto:casq89@gmail.com' },
+  { name: 'Email', url: `mailto:${email}` },
 ];
-
-export const email = 'casq89@gmail.com';
 
 /** Who I am: shown in the Hero and used to build the downloadable CV. */
 export const profile = {
