@@ -1,7 +1,6 @@
 import SectionHeader from '../../../../components/SectionHeader';
 import Window from '../../../../components/Window';
-
-const taskStates = ['waiting', 'active', 'completed'] as const;
+import TaskQueueDemo from './components/TaskQueueDemo';
 
 function Demos() {
   return (
@@ -13,36 +12,7 @@ function Demos() {
       />
 
       <div className="flex flex-col">
-        <Window title="demo/01 — redis + bullmq" meta="coming soon" className="w-full max-w-[680px]">
-          <div className="flex flex-col gap-3.5 p-6 md:pb-[130px]">
-            <h3 className="font-display text-3xl font-bold">Task queue</h3>
-            <p className="max-w-[460px] font-mono text-muted">
-              Send a task, it gets queued in Redis and a worker processes it. Watch it move through each state.
-            </p>
-            <ol className="flex flex-wrap items-center gap-2 font-mono text-sm">
-              {taskStates.map((state, i) => (
-                <li key={state} className="flex items-center gap-2">
-                  {i > 0 && <span className="text-subtle">→</span>}
-                  <span
-                    className={
-                      state === 'completed'
-                        ? 'rounded-lg bg-accent px-3 py-1.5 font-bold text-on-accent'
-                        : 'rounded-lg border-[1.5px] border-edge-strong px-3 py-1.5'
-                    }
-                  >
-                    {state}
-                  </span>
-                </li>
-              ))}
-            </ol>
-            <a
-              href="#"
-              className="mt-1.5 self-start rounded-[10px] bg-accent px-5 py-[11px] font-semibold text-on-accent"
-            >
-              Open demo ↗
-            </a>
-          </div>
-        </Window>
+        <TaskQueueDemo />
 
         {/* On desktop this window overlaps the previous one */}
         <Window

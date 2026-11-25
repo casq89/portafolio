@@ -62,7 +62,11 @@ function CvDocument({ accent, photo, siteUrl }: CvDocumentProps) {
     { label: 'Portfolio', value: siteUrl.replace(/^https?:\/\//, ''), url: siteUrl },
     ...socialLinks
       .filter((link) => !link.url.startsWith('mailto:'))
-      .map((link) => ({ label: link.name, value: link.url.replace(/^https?:\/\/(www\.)?/, ''), url: link.url })),
+      .map((link) => ({
+        label: link.name,
+        value: link.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''),
+        url: link.url,
+      })),
   ];
 
   return (

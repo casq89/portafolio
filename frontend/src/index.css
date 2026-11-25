@@ -34,6 +34,16 @@
       opacity: 0;
     }
   }
+
+  /* Cards appearing in a column (task queue demo) */
+  --animate-pop-in: pop-in 0.25s ease-out;
+
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.97);
+    }
+  }
 }
 
 @layer base {

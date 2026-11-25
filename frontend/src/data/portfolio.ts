@@ -108,8 +108,7 @@ export const email = 'contacto@casq89.com';
 
 export const socialLinks: SocialLink[] = [
   { name: 'GitHub', url: 'https://github.com/casq89' },
-  // TODO: replace with the personal LinkedIn profile URL.
-  { name: 'LinkedIn', url: 'https://www.linkedin.com' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/camilo-sanchez-155709402/' },
   { name: 'Email', url: `mailto:${email}` },
 ];
 

@@ -38,11 +38,10 @@ There are no tests yet.
   - Styling: Tailwind CSS 4 via `@tailwindcss/vite`, no config file. Design tokens (colors, fonts, offset shadows) are defined in `@theme` in `src/index.css`; use those utilities (`bg-surface`, `text-muted`, `shadow-layer`…) instead of raw hex values.
   - The accent color is switchable at runtime (Navbar `AccentPicker`, options in `data/accents.ts`, applied by `lib/accent.ts` and saved in `localStorage`). Text on an accent background must use `text-on-accent`, never `text-canvas`, so it stays readable on every accent.
   - TypeScript is pinned to `~6.0` because `typescript-eslint` does not support TypeScript 7 yet. Do not upgrade it until it does.
-- **Backend**: almost everything lives in `src/server.ts`:
-  - Express 5 with REST routes under `/api` (`GET /api/health`, `POST /api/tasks`, `POST /api/contact`)
+- **Backend**: `src/server.ts` wires everything together:
+  - Express 5 with REST routes under `/api` (`GET /api/health`, `POST /api/tasks`, `POST /api/contact`), Socket.IO and the shared ioredis connection
   - `src/contact.ts`: the contact form route. It validates the payload, ignores bots through a hidden `website` honeypot field, rate-limits in memory (5 per IP per hour) and sends the email through the Resend HTTP API (`fetch`, no SDK) to `CONTACT_TO`, with `Reply-To` set to the visitor. It does not use Redis or BullMQ, on purpose: keep it that way.
-  - Socket.IO to notify the client (`task:completed` event)
-  - BullMQ + ioredis for the `tasks` queue
+  - `src/tasks.ts`: the task queue demo (home "Demos" section, `screens/Home/components/Demos/components/TaskQueueDemo`). BullMQ `tasks` queue with a worker (concurrency 2, 3 attempts with exponential backoff, ~20% of attempts fail on purpose). `POST /api/tasks` with `{ count: 1..10 }` enqueues tasks (rate limit 30 per IP per minute, at most 60 pending overall). Every state change is broadcast to all browsers over Socket.IO (`task:waiting`, `task:active`, `task:progress`, `task:retrying`, `task:completed`, `task:failed`, each with a `TaskView`), and each new connection first gets `tasks:snapshot`. The event types are mirrored by hand in `frontend/src/lib/socket.ts` (shared, lazily created socket): keep both in sync.
 - **Communication**: in development, Vite proxies `/api` and `/socket.io` (WebSocket) to `http://127.0.0.1:3000` (see `frontend/vite.config.ts`). The frontend uses relative paths (`/api/...`), never the full backend URL.
 - **Backend config** comes from environment variables: `PORT` (3000), `HOST` (127.0.0.1), `REDIS_URL`, plus `RESEND_API_KEY`, `CONTACT_TO` and optional `CONTACT_FROM` for the contact form (without them `/api/contact` answers 503).
 
