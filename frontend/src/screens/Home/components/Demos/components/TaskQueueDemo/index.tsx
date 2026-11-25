@@ -1,5 +1,6 @@
+import { Link } from 'react-router';
 import Window from '../../../../../../components/Window';
-import type { TaskStatus, TaskView } from '../../../../../../lib/socket';
+import type { QueueInfo, TaskStatus, TaskView } from '../../../../../../lib/socket';
 import TaskCard from './components/TaskCard';
 import { useTaskQueue } from './useTaskQueue';
 
@@ -15,20 +16,36 @@ const columns: { status: TaskStatus; label: string }[] = [
 const byId = (a: TaskView, b: TaskView) => Number(a.id) - Number(b.id);
 const byNewest = (a: TaskView, b: TaskView) => (b.finishedAt ?? 0) - (a.finishedAt ?? 0);
 
+const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
+
+function statusLabel(connected: boolean, info: QueueInfo | null): string {
+  if (!connected) return '○ connecting…';
+  if (!info) return '● live';
+  return `● live · ${plural(info.workers, 'worker')} × ${plural(info.concurrency, 'slot')}`;
+}
+
 function TaskQueueDemo() {
-  const { tasks, mine, connected, sending, error, lastSend, send } = useTaskQueue();
+  const { tasks, mine, connected, info, sending, error, lastSend, send } = useTaskQueue();
 
   return (
-    <Window
-      title="demo/01 — redis + bullmq"
-      meta={connected ? '● live · 2 workers' : '○ connecting…'}
-      className="w-full max-w-[680px]"
-    >
+    <Window title="demo/01 — redis + bullmq" meta={statusLabel(connected, info)} className="w-full max-w-[680px]">
       <div className="flex flex-col gap-4 p-6 md:pb-[130px]">
-        <h3 className="font-display text-3xl font-bold">Task queue</h3>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h3 className="font-display text-3xl font-bold">Task queue</h3>
+          <Link
+            to="/queues"
+            className="group inline-flex items-center gap-2.5 rounded-[10px] border-[1.5px] border-accent bg-canvas px-4 py-2 font-mono text-sm font-semibold text-accent shadow-layer-sm transition hover:-translate-y-0.5 hover:bg-accent hover:text-on-accent hover:shadow-light-sm"
+          >
+            <span aria-hidden>{'</>'}</span>
+            How I built it
+            <span aria-hidden className="transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
+        </div>
         <p className="max-w-[520px] font-mono text-sm text-muted">
-          Send tasks to the server. Redis holds them in line and 2 workers process them, two at a time. Some
-          fail on purpose and get retried.
+          Send tasks to the server. Redis holds them in line and a worker takes them in order, as many at a
+          time as it has free slots. Some fail on purpose and get retried.
         </p>
 
         <div className="flex flex-wrap gap-3">

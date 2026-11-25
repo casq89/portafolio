@@ -5,6 +5,7 @@ import Hobbies from './screens/Hobbies';
 import Home from './screens/Home';
 import InvitationHomes from './screens/InvitationHomes';
 import Konecta from './screens/Konecta';
+import Queues from './screens/Queues';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/invitation-homes" element={<InvitationHomes />} />
         <Route path="/british-airways" element={<BritishAirways />} />
         <Route path="/hobbies" element={<Hobbies />} />
+        <Route path="/queues" element={<Queues />} />
         <Route path="*"element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getSocket, type TaskView } from '../../../../../../lib/socket';
+import { getSocket, type QueueInfo, type TaskView } from '../../../../../../lib/socket';
 
 const RECENT_FINISHED = 6;
 
@@ -28,6 +28,7 @@ export function useTaskQueue() {
   const [tasks, setTasks] = useState<Map<string, TaskView>>(new Map());
   const [mine, setMine] = useState<Set<string>>(new Set());
   const [connected, setConnected] = useState(() => getSocket().connected);
+  const [info, setInfo] = useState<QueueInfo | null>(null);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastSend, setLastSend] = useState<LastSend | null>(null);
@@ -45,6 +46,7 @@ export function useTaskQueue() {
 
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
+    socket.on('queue:info', setInfo);
     socket.on('tasks:snapshot', replaceAll);
     socket.on('task:waiting', addWaiting);
     socket.on('task:active', upsert);
@@ -56,6 +58,7 @@ export function useTaskQueue() {
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
+      socket.off('queue:info', setInfo);
       socket.off('tasks:snapshot', replaceAll);
       socket.off('task:waiting', addWaiting);
       socket.off('task:active', upsert);
@@ -92,5 +95,5 @@ export function useTaskQueue() {
     }
   }, []);
 
-  return { tasks: [...tasks.values()], mine, connected, sending, error, lastSend, send };
+  return { tasks: [...tasks.values()], mine, connected, info, sending, error, lastSend, send };
 }

@@ -22,7 +22,15 @@ export interface TaskView {
   finishedAt?: number;
 }
 
+export interface QueueInfo {
+  /** Workers listening to the queue, as Redis reports them */
+  workers: number;
+  /** Tasks each worker processes at the same time */
+  concurrency: number;
+}
+
 export interface TaskEvents {
+  'queue:info': (info: QueueInfo) => void;
   'tasks:snapshot': (tasks: TaskView[]) => void;
   'task:waiting': (task: TaskView) => void;
   'task:active': (task: TaskView) => void;
@@ -49,6 +57,7 @@ const RATE_LIMIT = 30;
 const RATE_WINDOW_MS = 60 * 1000;
 const REDIS_TIMEOUT_MS = 3000;
 const RECENT_FINISHED = 6;
+const QUEUE_INFO_INTERVAL_MS = 5000;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -161,8 +170,23 @@ export function createTasksDemo(io: Server<Record<string, never>, TaskEvents>, c
     ];
   }
 
+  // Ask Redis how many workers are listening, so a stopped worker shows up as 0.
+  async function queueInfo(): Promise<QueueInfo> {
+    const workers = await withTimeout(queue.getWorkersCount()).catch(() => 0);
+    return { workers, concurrency: CONCURRENCY };
+  }
+
+  let lastInfo: QueueInfo | null = null;
+  setInterval(() => {
+    queueInfo().then((info) => {
+      if (info.workers !== lastInfo?.workers) io.emit('queue:info', info);
+      lastInfo = info;
+    });
+  }, QUEUE_INFO_INTERVAL_MS).unref();
+
   // Every new browser (and every reconnection) gets the current board first.
   io.on('connection', (socket) => {
+    queueInfo().then((info) => socket.emit('queue:info', info));
     withTimeout(snapshot())
       .then((tasks) => socket.emit('tasks:snapshot', tasks))
       .catch(() => socket.emit('tasks:snapshot', []));

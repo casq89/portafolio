@@ -17,7 +17,15 @@ export interface TaskView {
   finishedAt?: number;
 }
 
+export interface QueueInfo {
+  /** Workers listening to the queue, as Redis reports them */
+  workers: number;
+  /** Tasks each worker processes at the same time */
+  concurrency: number;
+}
+
 export interface ServerToClientEvents {
+  'queue:info': (info: QueueInfo) => void;
   'tasks:snapshot': (tasks: TaskView[]) => void;
   'task:waiting': (task: TaskView) => void;
   'task:active': (task: TaskView) => void;
