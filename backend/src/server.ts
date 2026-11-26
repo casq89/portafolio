@@ -3,9 +3,11 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { Redis } from 'ioredis';
 import { contactRouter } from './contact.js';
+import { createMetricsDemo, type MetricsClientEvents, type MetricsEvents } from './metrics.js';
 import { createTasksDemo, type TaskEvents } from './tasks.js';
 
-type ServerToClientEvents = TaskEvents;
+type ServerToClientEvents = TaskEvents & MetricsEvents;
+type ClientToServerEvents = MetricsClientEvents;
 
 const PORT = Number(process.env.PORT ?? 3000);
 const HOST = process.env.HOST ?? '127.0.0.1';
@@ -18,7 +20,7 @@ app.use(express.json());
 app.use('/api/contact', contactRouter);
 
 const httpServer = createServer(app);
-const io = new Server<Record<string, never>, ServerToClientEvents>(httpServer);
+const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer);
 
 const connection = new Redis(REDIS_URL, { maxRetriesPerRequest: null });
 connection.on('error', (err) => {
@@ -26,6 +28,7 @@ connection.on('error', (err) => {
 });
 
 app.use('/api/tasks', createTasksDemo(io, connection));
+createMetricsDemo(io);
 
 app.get('/api/health', (_req, res) => {
   res.json({ ok: 'from typescript' });

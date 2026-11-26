@@ -57,3 +57,7 @@ export const britishAirwaysFeatures: CaseStudyFeature<BritishAirwaysFeatureId>[]
     points: ['Gate, seat and boarding info', 'Live Activities on the lock screen', 'Real-time flight status'],
   },
 ];
+
+/** Legal note shown at the bottom of the case study. */
+export const britishAirwaysDisclaimer =
+  'British Airways is a trademark of its respective owner. I worked on this app as part of the Globant team; this portfolio is not affiliated with or endorsed by British Airways. Screenshots are from the publicly released app.';

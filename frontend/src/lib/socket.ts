@@ -24,7 +24,30 @@ export interface QueueInfo {
   concurrency: number;
 }
 
+// Mirrors the types in backend/src/metrics.ts.
+export interface MetricsSample {
+  /** Server time in ms */
+  t: number;
+  /** CPU usage across all cores, 0 to 100 */
+  cpu: number;
+  /** Open TCP connections, IPv4 + IPv6. null when the server can't measure it (not Linux) */
+  tcp: number | null;
+  /** Bytes per second received. null when the server can't measure it (not Linux) */
+  netIn: number | null;
+  /** Bytes per second sent */
+  netOut: number | null;
+  /** Worst event loop delay in the interval, in ms */
+  lag: number;
+}
+
+export interface MetricsInfo {
+  cores: number;
+  intervalMs: number;
+}
+
 export interface ServerToClientEvents {
+  'metrics:snapshot': (snapshot: { info: MetricsInfo; samples: MetricsSample[] }) => void;
+  'metrics:sample': (sample: MetricsSample) => void;
   'queue:info': (info: QueueInfo) => void;
   'tasks:snapshot': (tasks: TaskView[]) => void;
   'task:waiting': (task: TaskView) => void;
@@ -35,7 +58,10 @@ export interface ServerToClientEvents {
   'task:failed': (task: TaskView) => void;
 }
 
-export type ClientToServerEvents = Record<string, never>;
+export interface ClientToServerEvents {
+  'metrics:subscribe': () => void;
+  'metrics:unsubscribe': () => void;
+}
 
 export type AppSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
 

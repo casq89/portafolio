@@ -14,6 +14,12 @@
   --color-accent: #ff8a3d;
   --color-on-accent: #0c0c0e;
 
+  /* One line color per resource in the server metrics chart (also read by its canvas) */
+  --color-metric-cpu: #4ade80;
+  --color-metric-net: #22d3ee;
+  --color-metric-tcp: #c084fc;
+  --color-metric-lag: #facc15;
+
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;

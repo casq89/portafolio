@@ -5,6 +5,7 @@ import PhoneFan from '../../components/PhoneFan';
 import PhonePair from '../../components/PhonePair';
 import {
   britishAirways,
+  britishAirwaysDisclaimer,
   britishAirwaysFeatures,
   britishAirwaysScreens as screens,
   type BritishAirwaysFeatureId,
@@ -30,6 +31,8 @@ function BritishAirways() {
           <FeatureRow key={feature.id} feature={feature} reversed={index % 2 === 1} visual={visuals[feature.id]} />
         ))}
       </div>
+
+      <p className="mb-16 max-w-[720px] font-mono text-xs text-subtle">{britishAirwaysDisclaimer}</p>
     </>
   );
 }
