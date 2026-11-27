@@ -70,3 +70,7 @@ export const invitationHomesFeatures: CaseStudyFeature<InvitationHomesFeatureId>
     ],
   },
 ];
+
+/** Legal note shown at the bottom of the case study. */
+export const invitationHomesDisclaimer =
+  'Invitation Homes is a trademark of its respective owner. I worked on this app as part of the 10Pearls team; this portfolio is not affiliated with or endorsed by Invitation Homes. Screenshots are from the publicly released app.';

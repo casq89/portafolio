@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router';
 import Window from '../../../../../../components/Window';
 import type { MetricsInfo, MetricsSample } from '../../../../../../lib/socket';
 import MetricsChart from './components/MetricsChart';
@@ -43,7 +44,19 @@ function ServerMetricsDemo({ className = '' }: { className?: string }) {
     <div ref={rootRef} className={className}>
       <Window title="demo/02 — socket.io" meta={statusLabel(connected, info, latest)} highlighted>
         <div className="flex flex-col gap-4 p-6">
-          <h3 className="font-display text-3xl font-bold">Real time</h3>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h3 className="font-display text-3xl font-bold">Real time</h3>
+            <Link
+              to="/maps-demo"
+              className="group inline-flex items-center gap-2.5 rounded-[10px] border-[1.5px] border-accent bg-canvas px-4 py-2 font-mono text-sm font-semibold text-accent shadow-layer-sm transition hover:-translate-y-0.5 hover:bg-accent hover:text-on-accent hover:shadow-light-sm"
+            >
+              <span aria-hidden>◍</span>
+              One more demo
+              <span aria-hidden className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
+            </Link>
+          </div>
           <p className="font-mono text-sm text-muted">
             The server behind this site measures itself every {intervalMs} ms and pushes each reading to your
             browser over a WebSocket. No polling, no reloads.

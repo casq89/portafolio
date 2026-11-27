@@ -5,6 +5,7 @@ import PhoneFan from '../../components/PhoneFan';
 import PhonePair from '../../components/PhonePair';
 import {
   invitationHomes,
+  invitationHomesDisclaimer,
   invitationHomesFeatures,
   invitationHomesScreens as screens,
   type InvitationHomesFeatureId,
@@ -33,6 +34,8 @@ function InvitationHomes() {
           <FeatureRow key={feature.id} feature={feature} reversed={index % 2 === 1} visual={visuals[feature.id]} />
         ))}
       </div>
+
+      <p className="mb-16 max-w-[720px] font-mono text-xs text-subtle">{invitationHomesDisclaimer}</p>
     </>
   );
 }

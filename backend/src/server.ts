@@ -3,11 +3,12 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { Redis } from 'ioredis';
 import { contactRouter } from './contact.js';
+import { createIssDemo, type IssClientEvents, type IssEvents } from './iss.js';
 import { createMetricsDemo, type MetricsClientEvents, type MetricsEvents } from './metrics.js';
 import { createTasksDemo, type TaskEvents } from './tasks.js';
 
-type ServerToClientEvents = TaskEvents & MetricsEvents;
-type ClientToServerEvents = MetricsClientEvents;
+type ServerToClientEvents = TaskEvents & MetricsEvents & IssEvents;
+type ClientToServerEvents = MetricsClientEvents & IssClientEvents;
 
 const PORT = Number(process.env.PORT ?? 3000);
 const HOST = process.env.HOST ?? '127.0.0.1';
@@ -29,6 +30,7 @@ connection.on('error', (err) => {
 
 app.use('/api/tasks', createTasksDemo(io, connection));
 createMetricsDemo(io);
+createIssDemo(io);
 
 app.get('/api/health', (_req, res) => {
   res.json({ ok: 'from typescript' });

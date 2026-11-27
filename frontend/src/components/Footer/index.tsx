@@ -1,4 +1,6 @@
-import { socialLinks } from '../../data/portfolio';
+import { profile, socialLinks } from '../../data/portfolio';
+
+const year = new Date().getFullYear();
 
 function Footer() {
   return (
@@ -16,6 +18,9 @@ function Footer() {
           </li>
         ))}
       </ul>
+      <p className="mt-4 text-xs text-subtle">
+        © {year} {profile.name}. All rights reserved.
+      </p>
     </footer>
   );
 }

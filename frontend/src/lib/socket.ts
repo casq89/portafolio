@@ -45,7 +45,29 @@ export interface MetricsInfo {
   intervalMs: number;
 }
 
+// Mirrors the types in backend/src/iss.ts.
+/** [time in ms, latitude, longitude, altitude in km] */
+export type IssPoint = [number, number, number, number];
+
+export interface IssPosition {
+  t: number;
+  lat: number;
+  lng: number;
+  altKm: number;
+  speedKmh: number;
+}
+
+export interface IssTrack {
+  /** Orbit around now (past and upcoming), for drawing the path */
+  points: IssPoint[];
+  /** When the orbital elements were measured (ms) */
+  epoch: number;
+  intervalMs: number;
+}
+
 export interface ServerToClientEvents {
+  'iss:track': (track: IssTrack) => void;
+  'iss:position': (position: IssPosition) => void;
   'metrics:snapshot': (snapshot: { info: MetricsInfo; samples: MetricsSample[] }) => void;
   'metrics:sample': (sample: MetricsSample) => void;
   'queue:info': (info: QueueInfo) => void;
@@ -61,6 +83,8 @@ export interface ServerToClientEvents {
 export interface ClientToServerEvents {
   'metrics:subscribe': () => void;
   'metrics:unsubscribe': () => void;
+  'iss:subscribe': () => void;
+  'iss:unsubscribe': () => void;
 }
 
 export type AppSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
